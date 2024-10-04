@@ -18,15 +18,15 @@ router.get(
   meetingController.getMeetingsByParticipant
 );
 
-// Route to get meetings by multiple participant IDs
-router.post("/participants", meetingController.getMeetingsByParticipants);
-
-// Route to get meetings happening during a particular time
-router.get("/time", meetingController.getMeetingsByTime);
-
 router.post(
   "/:meetingId/participants",
   meetingController.addParticipantToMeeting
 ); // Add a participant to a meeting
+
+router.delete("/:meetingId", meetingController.deleteMeeting); // Delete a meeting
+router.delete(
+  "/:meetingId/participants/:participantId",
+  meetingController.removeParticipantFromMeeting
+);
 
 module.exports = router;

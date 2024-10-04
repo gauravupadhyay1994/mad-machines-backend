@@ -85,6 +85,7 @@ const canParticipantBeAdded = async (startTime, endTime, participantIds) => {
         include: [
           {
             model: Participant,
+            as: "participants",
             where: { id: { [Op.in]: participantIds } }, // Check for all participants
           },
         ],

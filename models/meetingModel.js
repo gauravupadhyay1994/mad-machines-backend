@@ -1,4 +1,3 @@
-// src/models/meetingModel.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 const Participant = require("./participantModel");
@@ -26,10 +25,7 @@ const Meeting = sequelize.define("Meeting", {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
+
   created_by: {
     type: DataTypes.BIGINT,
     allowNull: false,
@@ -37,9 +33,23 @@ const Meeting = sequelize.define("Meeting", {
 });
 
 // Setting up relationships
-Meeting.belongsTo(Participant, { foreignKey: "created_by" });
-Participant.hasMany(Meeting, { foreignKey: "created_by" });
 Meeting.belongsTo(Room, { foreignKey: "room_id" });
 Room.hasMany(Meeting, { foreignKey: "room_id" });
+
+// Define many-to-many relationship with Participant
+Meeting.belongsToMany(Participant, {
+  through: "MeetingParticipants",
+  foreignKey: "meetingId",
+  otherKey: "participantId",
+  as: "participants", // Correct alias here
+});
+
+// In Participant model
+Participant.belongsToMany(Meeting, {
+  through: "MeetingParticipants",
+  foreignKey: "participantId",
+  otherKey: "meetingId",
+  as: "meetings", // Correct alias here
+});
 
 module.exports = Meeting;

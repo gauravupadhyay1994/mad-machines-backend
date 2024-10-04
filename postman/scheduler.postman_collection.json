@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "e0bf930f-c5fe-4772-9891-24d86fa50706",
+		"name": "scheduler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21809496"
+	},
+	"item": [
+		{
+			"name": "participants",
+			"item": [
+				{
+					"name": "create participants",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Ramesh\",\r\n  \"email\": \"gaurav15@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/participants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"participants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all participants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/participants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"participants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get participants based on id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/participants/:participantId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"participants",
+								":participantId"
+							],
+							"variable": [
+								{
+									"key": "participantId",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update participants details",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Gaurav\",\r\n  \"email\": \"gaurav1567@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/participants/:participantId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"participants",
+								":participantId"
+							],
+							"variable": [
+								{
+									"key": "participantId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a participant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/participants/:participantId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"participants",
+								":participantId"
+							],
+							"variable": [
+								{
+									"key": "participantId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "meeting",
+			"item": [
+				{
+					"name": "create a meeting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Backend development discussion\",\r\n  \"startTime\": \"2024-10-10T14:00:00\",\r\n  \"endTime\": \"2024-10-10T15:00:00\",\r\n  \"roomId\": 1,\r\n  \"createdBy\":1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/meetings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all meetings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/meetings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get room based on room number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/meetings/room/:roomId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings",
+								"room",
+								":roomId"
+							],
+							"variable": [
+								{
+									"key": "roomId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by participant id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/meetings/participant/:participantId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings",
+								"participant",
+								":participantId"
+							],
+							"variable": [
+								{
+									"key": "participantId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleting a meeting based on id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/meetings/:meetingId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings",
+								":meetingId"
+							],
+							"variable": [
+								{
+									"key": "meetingId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove a pariticipant from a meeting",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/meetings/:meetingId/participants/:participantId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings",
+								":meetingId",
+								"participants",
+								":participantId"
+							],
+							"variable": [
+								{
+									"key": "meetingId",
+									"value": "2"
+								},
+								{
+									"key": "participantId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add participants",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"participantId\": [2]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/meetings/:meetingId/participants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"meetings",
+								":meetingId",
+								"participants"
+							],
+							"variable": [
+								{
+									"key": "meetingId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rooms",
+			"item": [
+				{
+					"name": "create a room",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Room 101\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rooms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/rooms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get room by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/rooms/:roomId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rooms",
+								":roomId"
+							],
+							"variable": [
+								{
+									"key": "roomId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a room",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Gaurav's room\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rooms/:roomId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rooms",
+								":roomId"
+							],
+							"variable": [
+								{
+									"key": "roomId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a room",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/rooms/:roomId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rooms",
+								":roomId"
+							],
+							"variable": [
+								{
+									"key": "roomId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/v1"
+		}
+	]
+}

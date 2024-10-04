@@ -13,7 +13,7 @@ app.use("/v1/rooms", roomRoutes); // roomRoutes route
 
 const syncDatabase = async () => {
   try {
-    await sequelize.sync({ force: true }); // Use force: true to drop and recreate tables (for development)
+    await sequelize.sync({ force: false }); // Use force: true to drop and recreate tables (for development)
     console.log("Database & tables created!");
   } catch (error) {
     console.error("Error creating database tables:", error);
