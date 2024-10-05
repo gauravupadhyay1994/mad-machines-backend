@@ -1,79 +1,103 @@
-# mad-machines-backend
+# Mad Machines Backend - Meeting Scheduler API
 
-This repository contains a Meeting Scheduler API built with Node.js and Express.js, designed to help schedule meetings while preventing conflicts such as double bookings of rooms or overlapping participant schedules.
+A Node.js and Express.js-based API designed to streamline scheduling meetings, prevent room double bookings, and avoid overlapping participant schedules.
 
-# Assumptions:
+---
 
-1. Meetings can be scheduled at any time, including non-standard hours.
-2. There is no limit to the capacity of any room.
-3. Any user can create a meeting.
-4. Any user can invite others to participate in a meeting.
+## 📋 **Assumptions**
 
-Note: login is not implemented, therefore meeting created by will be passed manually
+1. **Flexible Scheduling:** Meetings can be scheduled at any time, even outside standard hours.
+2. **Unlimited Room Capacity:** No limit on the number of participants a room can accommodate.
+3. **Open Participation:** Any user can create a meeting and invite others to join.
+4. **Manual Creator Assignment:** Since login is not implemented, the `created_by` field must be manually passed.
 
-# Database Choice: PostgreSQL
+---
 
-Reason: PostgreSQL is chosen because of its strong support for concurrent transactions, making it ideal for handling collision detection. It also supports complex queries with its robust SQL capabilities, enabling easy querying for overlapping time periods and participant availability. Additionally, its ACID compliance ensures data consistency and integrity in a scheduling system.
+## 💾 **Database Choice: PostgreSQL**
 
-Database tables are provided in the schema.sql within the db folder available in the same directory
+- **Why PostgreSQL?**
+  - **Concurrency:** Ideal for managing transactions without conflict.
+  - **Complex Queries:** Robust support for SQL-based queries to handle participant availability and overlapping time periods.
+  - **ACID Compliance:** Guarantees data consistency and integrity.
 
-# API endpoints
+You can find the database schema in `schema.sql` located in the `db` folder.
 
-    You can import file for the postman available within the same directory with the postman folder to check all the api endpoints
+---
 
-- How the Scheduler Works
-  The scheduler operates through a series of checks and validations to ensure that meetings can be scheduled without conflicts. Here’s an in-depth explanation of the scheduling process:
+## 🛠️ **Getting Started**
 
-1.  Creating a Meeting
-    When a new meeting is created, the following steps are executed:
+### **Prerequisites**
 
-    Input Validation: The API checks the provided input to ensure that all required fields (start time, end time, and room ID) are present and correctly formatted.
+- **Node.js**
+- **PostgreSQL**
 
-    Collision Check: Before proceeding, the API invokes the checkForCollisions function. This function performs two key checks:
+### **Installation Steps**
 
-    Room Collision: It queries the database to determine if the specified room is already booked during the requested time frame.
+1. **Clone the Repository:**
 
-    It checks: If the new meeting's start time falls within an existing meeting's duration.
-    If the new meeting's end time falls within an existing meeting's duration.
-    If the existing meeting starts before the new meeting ends and ends after the new meeting starts.
+   ```bash
+   git clone https://github.com/gauravupadhyay1994/mad-machines-backend.git
+   ```
 
-    Participant Collision: If participant IDs are provided, the function checks if any of the specified participants are already scheduled for another meeting during the requested time. Similar checks are applied as with the room collision.
+2. **Navigate to the Project Directory:**
 
-    Scheduling the Meeting: If no collisions are found, the meeting is scheduled, and its details are stored in the database.
+   ```bash
+   cd mad-machines-backend
+   ```
 
-2.  Adding Participants to a Meeting
-    When adding participants to an existing meeting:
+3. **Install Dependencies:**
 
-         The API first verifies that the meeting exists.
-         It then checks for collisions for each participant being added using the canParticipantBeAdded function, which follows a similar process to the room collision checks.
-         If all checks pass, the participants are added to the meeting. 3. Retrieving Meetings
+   ```bash
+   npm install
+   ```
 
-# Getting Started
+4. **Configure the Database Connection:**
 
--- Prerequisites
-Node.js
-PostgreSQL
+   Update your `.env` file using the provided `.env.example` template in the root directory.
 
-# Installation
+5. **Run the Server:**
 
-Clone the repository:
+   ```bash
+   npm run dev
+   ```
 
-    git clone https://github.com/gauravupadhyay1994/mad-machines-backend.git
+6. **Test the API Using Postman:**
 
-Navigate to the project directory:
+   Import the Postman collection provided in the `postman` folder to test all endpoints.
 
-    cd meeting-machines-backend
+---
 
-Install the dependencies:
+## 🚀 **How the Scheduler Works**
 
-    npm install
+### **1. Creating a Meeting**
 
-Configure the database connection in the .env file. (parameters to be added are given in the .env.example file in the directory)
+- **Input Validation:** Ensures required fields (start time, end time, room ID) are present and formatted correctly.
+- **Collision Check:** The `checkForCollisions` function performs two key validations:
 
-Run the server:
+  - **Room Collision:** Confirms the room is available by checking for overlapping time slots.
+  - **Participant Collision:** Verifies if participants are free during the requested time, ensuring no conflicting meetings.
 
-    npm run dev
+- **Meeting Creation:** If no collisions are found, the meeting is stored in the database.
 
-Testing the API with Postman
+---
 
-    Open Postman and import the collection
+### **2. Adding Participants to a Meeting**
+
+- **Meeting Validation:** The system ensures the meeting exists before adding participants.
+- **Collision Check for Participants:** Using `canParticipantBeAdded`, the system ensures participants have no scheduling conflicts before they're added.
+
+---
+
+### **3. Retrieving Meetings**
+
+All scheduled meetings can be fetched, including room and participant details.
+
+---
+
+## 📑 **API Endpoints**
+
+Import the Postman collection in the `postman` folder to see the full list of API endpoints, parameters, and sample requests.
+
+---
+
+**Happy Scheduling!** 🎉
